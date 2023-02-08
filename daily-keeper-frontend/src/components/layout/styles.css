@@ -1,0 +1,40 @@
+.sider {
+    position: relative;
+}
+
+.btn-add {
+    position: absolute;
+    right: 0;
+
+}
+
+.menu-item-number {
+    position: absolute;
+    right: 0;
+    background-color: #F5F5F5;
+    margin: 10px;
+}
+
+.tag-color {
+    position: absolute;
+    right: 10%;
+    min-height: 16px;
+    min-width: 16px;
+    border-radius: 10px;
+    margin:12px;
+}
+
+.tag-delete {
+    position: absolute;
+    right: 18%;
+    margin: 8px;
+}
+
+.color-picker-action {
+    display: inline-block; 
+    margin: 0 10px;       
+}
+
+.sider {
+    border-radius: 10px;
+}

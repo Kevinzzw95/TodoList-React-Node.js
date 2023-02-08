@@ -1,0 +1,31 @@
+.todo-item-text {
+    overflow-wrap: break-word;
+    color: #1e3d59
+}
+
+.todo-text-strikethrough {
+    text-decoration: line-through;
+    text-decoration-color: black;
+}
+
+.greeting {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 30px;
+}
+
+.name {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    color:#6495ED;
+    position: relative;
+    left:5%;
+}
+
+.input-task {
+    position: relative;                                  
+    left: 15%;            
+}
+
+.list-title {
+    font-family: 'Ubuntu', sans-serif;
+}
