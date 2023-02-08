@@ -16,7 +16,7 @@ function TodoSider({onFilter}: SiderProps) {
   } = theme.useToken();
       
   return (
-      <Sider className="sider" style={{ background: colorBgContainer, height: '93vh'}} width={300}>
+      <Sider className="sider" style={{ background: colorBgContainer, height: '93vh'}} width={400}>
           <div className="name" style={{ height: 32, margin: 16 }}>DailyKeeper</div>
           <TodoMenu onFilter={onFilter}/>
       </Sider>

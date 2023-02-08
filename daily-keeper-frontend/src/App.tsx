@@ -25,7 +25,7 @@ function App() {
       <Layout style={{ minHeight: '100vh' }} >
         <TodoSider onFilter={setFilterBy}/>
         <Layout className="site-layout">
-          <Content style={{ margin: '24px 24px'}} >
+          <Content style={{ margin: '30px 30px'}} >
             <div className="main" style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
               <CreateTodo />
               <TodoList filter={filterBy}/>

@@ -5,7 +5,7 @@ import { EditTwoTone } from '@ant-design/icons';
 import { useContext } from 'react';
 import { TaskContext } from '../../contexts/task.context';
 import { TagContext } from '../../contexts/tag.context';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import axios from 'axios';
 
 const { Option } = Select;
@@ -17,7 +17,7 @@ interface EditTodoProps {
 interface UpdateValues {
     content: string;
     tag: string;
-    date: Date;
+    date: Dayjs;
 }
 
 interface CollectionCreateFormProps {
@@ -37,8 +37,8 @@ function EditTodo({ task } : EditTodoProps) {
         console.log(`selected ${value}`);
     };
 
-    const onChangeDate: DatePickerProps['onChange'] = (date, dateString) => {
-        console.log(date, dateString);
+    const onChangeDate: DatePickerProps['onChange'] = (date) => {
+        console.log(date?.toDate());
     };
 
     const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
@@ -108,11 +108,13 @@ function EditTodo({ task } : EditTodoProps) {
     const onCreate = (updateValues: any) => {
         console.log('Received values of form: ', updateValues);
 
-        const updatedTask = new Task(task.id, updateValues.content, updateValues.date, updateValues.tag);
+        task.content = updateValues.content;
+        task.date = updateValues.date.toDate();
+        task.tagId = tags.find((tag) => tag.name === updateValues.tag)!.id;
 
-        axios.put(`api/tasks/${task.id}`, updatedTask).then((res) => {
+        axios.put(`api/tasks/${task.id}`, task).then((res) => {
             console.log(res.data);
-            updateTask(task.id, updateValues.content, updateValues.tag, updateValues.date);
+            updateTask(task.id, task.content, task.tagId, task.date);
             setOpen(false);
         }).catch((data) => {
             console.log('error', data)
