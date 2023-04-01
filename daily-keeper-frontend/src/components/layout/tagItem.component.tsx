@@ -38,7 +38,7 @@ function TagItem({tag} : TagComponentProps) {
                 })
         
                 tasks.map((task) => {
-                    if(task.tagId === id) {
+                    if(task.tag_id === id) {
                         axios.delete(`api/tasks/${task.id}`).then((res) => {
                             deleteTask(task.id);
                         }).catch((data) => {
@@ -58,7 +58,7 @@ function TagItem({tag} : TagComponentProps) {
         updateTagColor(tag.id, color);
         tag.color = color;
         axios.put(`api/tags/${tag.id}`, tag).then((res) => {
-            console.log(res.data);
+            console.log("tag update: " + res.data);
         }).catch((data) => {
             console.log('error', data)
         });
@@ -112,7 +112,7 @@ function TagItem({tag} : TagComponentProps) {
 
                 <span>
                     <Tag className="menu-item-number">
-                        {tasks.filter((task) => task.tagId === tag.id)?.length}
+                        {tasks.filter((task) => task.tag_id === tag.id)?.length}
                     </Tag>
                 </span>
             </div>

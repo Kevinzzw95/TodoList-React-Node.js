@@ -8,12 +8,6 @@ interface Props {
     children?: React.ReactNode;
 }
 
-interface TagResponse {
-    _embedded: {
-        tags: Tag[];
-    }     
-}
-
 interface TagContextProps {
     tags: Tag[];
     curTagId: number;
@@ -30,10 +24,10 @@ function TagProvider({children} : Props) {
     const[curTagId, setCurTagId] = useState<number>(1);
 
     useEffect(() => {
-        axios.get<TagResponse>('/api/tags').then(
+        axios.get<Tag[]>('/api/tags').then(
             res => {
                 console.log('tag data: ', res.data);
-                setTags(res.data._embedded.tags);
+                setTags(res.data);
             },
             err => {
                 console.log(err);

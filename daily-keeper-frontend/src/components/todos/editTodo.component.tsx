@@ -5,7 +5,7 @@ import { EditTwoTone } from '@ant-design/icons';
 import { useContext } from 'react';
 import { TaskContext } from '../../contexts/task.context';
 import { TagContext } from '../../contexts/tag.context';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import axios from 'axios';
 
 const { Option } = Select;
@@ -17,7 +17,7 @@ interface EditTodoProps {
 interface UpdateValues {
     content: string;
     tag: string;
-    date: Dayjs;
+    date: Date;
 }
 
 interface CollectionCreateFormProps {
@@ -37,8 +37,8 @@ function EditTodo({ task } : EditTodoProps) {
         console.log(`selected ${value}`);
     };
 
-    const onChangeDate: DatePickerProps['onChange'] = (date) => {
-        console.log(date?.toDate());
+    const onChangeDate: DatePickerProps['onChange'] = (date, dateString) => {
+        console.log(date, dateString);
     };
 
     const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
@@ -73,7 +73,7 @@ function EditTodo({ task } : EditTodoProps) {
               initialValues={{ 
                 content: task.content, 
                 date: dayjs(task.date), 
-                tag: tags.find((tag) => tag.id === task.tagId)?.name}}
+                tag: tags.find((tag) => tag.id === task.tag_id)?.name}}
             >
                 <Form.Item
                     name="content"
@@ -108,13 +108,11 @@ function EditTodo({ task } : EditTodoProps) {
     const onCreate = (updateValues: any) => {
         console.log('Received values of form: ', updateValues);
 
-        task.content = updateValues.content;
-        task.date = updateValues.date.toDate();
-        task.tagId = tags.find((tag) => tag.name === updateValues.tag)!.id;
+        const updatedTask = new Task(task.id, updateValues.content, updateValues.date, updateValues.tag);
 
-        axios.put(`api/tasks/${task.id}`, task).then((res) => {
+        axios.put(`api/tasks/${task.id}`, updatedTask).then((res) => {
             console.log(res.data);
-            updateTask(task.id, task.content, task.tagId, task.date);
+            updateTask(task.id, updateValues.content, updateValues.tag, updateValues.date);
             setOpen(false);
         }).catch((data) => {
             console.log('error', data)

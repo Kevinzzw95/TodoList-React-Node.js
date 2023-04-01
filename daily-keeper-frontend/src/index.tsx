@@ -6,7 +6,7 @@ import axios from 'axios';
 import TasksProvider from './contexts/task.context';
 import TagProvider from './contexts/tag.context';
 
-axios.defaults.baseURL = 'http://localhost:8080/'
+axios.defaults.baseURL = 'http://localhost:5000/'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

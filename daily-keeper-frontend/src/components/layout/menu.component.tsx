@@ -41,6 +41,7 @@ function TodoMenu({onFilter} : TodoMenuProps) {
     
         const newTag = new myTag(id, trimedInput, "#0564A4");
         axios.post('api/tags', newTag).then((res) => {
+            console.log("Tag Created!" + res.data);
           setInput('');
           addTag(newTag);
         }).catch((data) => {
@@ -116,7 +117,7 @@ function TodoMenu({onFilter} : TodoMenuProps) {
                 Completed
                 <span>
                     <Tag className="menu-item-number">
-                        {tasks.filter((task) => task.done === true).length}
+                        {tasks.filter((task) => task.is_done === true).length}
                     </Tag>
                 </span>
             </MenuItem>

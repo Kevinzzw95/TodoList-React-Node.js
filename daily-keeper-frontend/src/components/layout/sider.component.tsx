@@ -1,7 +1,6 @@
-import { Layout, Menu, theme, MenuProps, Button, Input} from "antd"
+import { Layout, theme } from "antd"
 import "./styles.css";
 import TodoMenu from "./menu.component";
-import { Fragment, useState } from "react";
 
 const { Sider } = Layout;
 
@@ -16,7 +15,7 @@ function TodoSider({onFilter}: SiderProps) {
   } = theme.useToken();
       
   return (
-      <Sider className="sider" style={{ background: colorBgContainer, height: '93vh'}} width={400}>
+      <Sider className="sider" style={{ background: colorBgContainer, height: '93vh'}} width={300}>
           <div className="name" style={{ height: 32, margin: 16 }}>DailyKeeper</div>
           <TodoMenu onFilter={onFilter}/>
       </Sider>

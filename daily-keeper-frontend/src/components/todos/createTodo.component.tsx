@@ -57,7 +57,7 @@ const CreateTodo = () => {
         setSelectedTag(targetTag!);
     }
 
-    const handleSelectDate = (date: dayjs.Dayjs| null) => {
+    const handleSelectdate = (date: dayjs.Dayjs| null) => {
         setDate(date!.toDate());
     };
 
@@ -98,7 +98,7 @@ const CreateTodo = () => {
                         </Fragment>
                     ))}
                 </Select>
-                <DatePicker defaultPickerValue={dayjs()} onChange={handleSelectDate}/>
+                <DatePicker defaultPickerValue={dayjs()} onChange={handleSelectdate}/>
                 <Button className="create-btn" type="primary" onClick={onSubmitTodo}>Add</Button>
 
             </Input.Group>

@@ -1,12 +1,10 @@
-import {Form, Divider, List, Typography, Checkbox, Tag } from 'antd';
-import React, { useContext, useEffect, useState } from 'react';
-import type { CheckboxChangeEvent } from 'antd/es/checkbox';
+import {Form, Divider, List, Typography } from 'antd';
+import React, { useContext } from 'react';
+
 import { TaskContext } from '../../contexts/task.context';
-import DeleteTodo from './deleteTodo.component';
-import EditTodo from './editTodo.component';
+
 import { TagContext } from '../../contexts/tag.context';
-import axios from 'axios';
-import { Task } from '../../common/task';
+
 import "./style.css";
 import ListItem from './listItem.component';
 
@@ -17,8 +15,8 @@ interface TodoListProps {
 }
 
 function TodoList({filter} : TodoListProps) {
-    const {tasks, updateTaskStates} = useContext(TaskContext);
-    const {tags, curTagId} = useContext(TagContext);
+    const { tasks } = useContext(TaskContext);
+    const { curTagId } = useContext(TagContext);
 
     const filterTasks = tasks.filter((task) => {
         switch (filter) {
@@ -26,10 +24,10 @@ function TodoList({filter} : TodoListProps) {
                 return (new Date(task.date)).toDateString() === (new Date()).toDateString();
 
             case 'Complete':
-                return task.done;
+                return task.is_done;
 
             case 'Tags':
-                return task.tagId === curTagId;
+                return task.tag_id === curTagId;
 
             default:
                 return true;

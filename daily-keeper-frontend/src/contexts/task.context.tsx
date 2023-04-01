@@ -9,12 +9,6 @@ interface Props {
     children?: React.ReactNode;
 }
 
-interface TaskResponse {
-    _embedded: {
-        tasks: Task[];
-    }     
-}
-
 interface TaskContextProps {
     tasks: Task[];
     addTask: (newTask: Task) => void;
@@ -39,7 +33,7 @@ function TasksProvider({children} : Props) {
             if(task.id === id) {
                 task.id = id;
                 task.content = content;
-                task.tagId = tagId;
+                task.tag_id = tagId;
                 task.date = date;
             }
             return task;
@@ -50,7 +44,7 @@ function TasksProvider({children} : Props) {
     const updateTaskStates = (id: string, checked: boolean, importance: boolean, urgency: boolean) => {
         const newTasks = tasks.map(task => {
             if(task.id === id) {
-                return { ...task, isDone: checked, isImportant: importance, isUrgent: urgency };
+                return { ...task, is_done: checked, isImportant: importance, isUrgent: urgency };
             }
             return task;
         });
@@ -58,10 +52,10 @@ function TasksProvider({children} : Props) {
     }
 
     useEffect(() => {
-        axios.get<TaskResponse>('/api/tasks').then(
+        axios.get<Task[]>('/api/tasks').then(
             res => {
                 console.log('task data: ', res.data)
-                setTasks(res.data._embedded.tasks.sort((a, b) => a.date < b.date ? -1 : 1));
+                setTasks(res.data.sort((a, b) => a.date < b.date ? -1 : 1));
             },
             err => {
                 console.log(err);

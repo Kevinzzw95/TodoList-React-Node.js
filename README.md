@@ -1,6 +1,6 @@
 # TodoList-DailyKeeper
 
-This application was built using React as frontend(with Antd UI library), SpringBoot as backend and PostgreSQL as database. This app has following features:
+This application was built based on PERN(Postgres, Express.js, React, Node.js) stack(using Antd UI library) with following features:
 
 ## Add Tasks
 Add non-empty tasks with content, tag and scheduled date.
